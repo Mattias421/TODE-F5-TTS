@@ -10,7 +10,7 @@ datasets:
   num_workers: 8
 
 optim:
-  epochs: 500
+  epochs: 1000
   learning_rate: 7.5e-5
   num_warmup_updates: 20000  # warmup steps
   grad_accumulation_steps: 1  # note: updates = steps / grad_accumulation_steps
