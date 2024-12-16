@@ -540,8 +540,24 @@ def remove_silence_for_generated_wav(filename):
 
 
 def save_spectrogram(spectrogram, path):
-    plt.figure(figsize=(12, 4))
-    plt.imshow(spectrogram, origin="lower", aspect="auto")
+    fig = plt.figure()
+    ax = plt.axes()
+    im = ax.imshow(
+        spectrogram,
+        interpolation="nearest",
+        aspect=2,
+        origin="lower",
+        cmap="jet",
+    )
+    cax = fig.add_axes(
+        [
+            ax.get_position().x1 + 0.01,
+            ax.get_position().y0,
+            0.02,
+            ax.get_position().height,
+        ]
+    )
+    plt.colorbar(im, cax=cax)
     plt.colorbar()
     plt.savefig(path)
     plt.close()
