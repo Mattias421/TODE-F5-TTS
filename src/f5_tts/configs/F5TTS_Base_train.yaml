@@ -19,7 +19,7 @@ optim:
 
 model:
   name: F5TTS_Base  # model name
-  tokenizer: pinyin  # tokenizer type
+  tokenizer: char  # tokenizer type
   tokenizer_path: None  # if tokenizer = 'custom', define the path to the tokenizer you want to use (should be vocab.txt)
   arch:
     dim: 1024
