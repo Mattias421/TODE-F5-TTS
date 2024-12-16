@@ -3,11 +3,11 @@ hydra:
     dir: ckpts/${model.name}_${model.mel_spec.mel_spec_type}_${model.tokenizer}_${datasets.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
     
 datasets:
-  name: Emilia_ZH_EN
+  name: LJSpeech
   batch_size_per_gpu: 38400  # 8 GPUs, 8 * 38400 = 307200
   batch_size_type: frame  # "frame" or "sample"
-  max_samples: 64  # max sequences per batch if use frame-wise batch_size. we set 32 for small models, 64 for base models
-  num_workers: 16
+  max_samples: 16  # max sequences per batch if use frame-wise batch_size. we set 32 for small models, 64 for base models
+  num_workers: 8
 
 optim:
   epochs: 15
@@ -19,7 +19,7 @@ optim:
 
 model:
   name: F5TTS_Small
-  tokenizer: pinyin
+  tokenizer: char
   tokenizer_path: None  # if tokenizer = 'custom', define the path to the tokenizer you want to use (should be vocab.txt)
   arch:
     dim: 768
