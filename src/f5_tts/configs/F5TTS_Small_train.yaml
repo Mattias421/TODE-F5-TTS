@@ -4,21 +4,21 @@ hydra:
     
 datasets:
   name: LJSpeech_train
-  batch_size_per_gpu: 38400  # 8 GPUs, 8 * 38400 = 307200
+  batch_size_per_gpu: 38400 / 2  # 8 GPUs, 8 * 38400 = 307200 (stanage has max 4 GPU)
   batch_size_type: frame  # "frame" or "sample"
-  max_samples: 64  # max sequences per batch if use frame-wise batch_size. we set 32 for small models, 64 for base models
-  num_workers: 8
+  max_samples: 32  # max sequences per batch if use frame-wise batch_size. we set 32 for small models, 64 for base models
+  num_workers: 4
 
 optim:
-  epochs: 1000
+  epochs: 2064
   learning_rate: 7.5e-5
-  num_warmup_updates: 20000  # warmup steps
-  grad_accumulation_steps: 1  # note: updates = steps / grad_accumulation_steps
+  num_warmup_updates: 2000  # warmup steps
+  grad_accumulation_steps: 2  # note: updates = steps / grad_accumulation_steps
   max_grad_norm: 1.0  # gradient clipping
   bnb_optimizer: False  # use bnb 8bit AdamW optimizer or not
 
 model:
-  name: F5TTS_Small
+  name: F5TTS_Small_beta
   tokenizer: char
   tokenizer_path: None  # if tokenizer = 'custom', define the path to the tokenizer you want to use (should be vocab.txt)
   arch:
@@ -30,8 +30,8 @@ model:
     conv_layers: 4
     checkpoint_activations: False  # recompute activations and save memory for extra compute
   mel_spec:
-    target_sample_rate: 24000
-    n_mel_channels: 100
+    target_sample_rate: 22050
+    n_mel_channels: 80
     hop_length: 256
     win_length: 1024
     n_fft: 1024
@@ -42,6 +42,6 @@ model:
 
 ckpts:
   logger: wandb  # wandb | tensorboard | None
-  save_per_updates: 50000  # save checkpoint per steps
-  last_per_steps: 5000  # save last checkpoint per steps
+  save_per_updates: 1000  # save checkpoint per steps
+  last_per_steps: 500  # save last checkpoint per steps
   save_dir: ckpts/${model.name}_${model.mel_spec.mel_spec_type}_${model.tokenizer}_${datasets.name}
