@@ -4,7 +4,7 @@ hydra:
     
 datasets:
   name: LJSpeech_train
-  batch_size_per_gpu: 38400 / 2  # 8 GPUs, 8 * 38400 = 307200 (stanage has max 4 GPU)
+  batch_size_per_gpu: 19200  # 4 GPUs, 2 grad_accumulation_steps, 4 * 2 * 19200  = ??? (stanage has max 4 GPU)
   batch_size_type: frame  # "frame" or "sample"
   max_samples: 32  # max sequences per batch if use frame-wise batch_size. we set 32 for small models, 64 for base models
   num_workers: 4
@@ -29,9 +29,16 @@ model:
     text_dim: 512
     conv_layers: 4
     checkpoint_activations: False  # recompute activations and save memory for extra compute
+  # mel_spec:
+  #   target_sample_rate: 22050
+  #   n_mel_channels: 80
+  #   hop_length: 256
+  #   win_length: 1024
+  #   n_fft: 1024
+  #   mel_spec_type: vocos  # 'vocos' or 'bigvgan'
   mel_spec:
-    target_sample_rate: 22050
-    n_mel_channels: 80
+    target_sample_rate: 24000
+    n_mel_channels: 100
     hop_length: 256
     win_length: 1024
     n_fft: 1024
