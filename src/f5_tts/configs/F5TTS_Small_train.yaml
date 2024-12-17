@@ -10,10 +10,10 @@ datasets:
   num_workers: 4
 
 optim:
-  epochs: 2064
+  epochs: 3793
   learning_rate: 7.5e-5
-  num_warmup_updates: 2000  # warmup steps
-  grad_accumulation_steps: 2  # note: updates = steps / grad_accumulation_steps
+  num_warmup_updates: 20000  # warmup steps
+  grad_accumulation_steps: 4  # note: updates = steps / grad_accumulation_steps
   max_grad_norm: 1.0  # gradient clipping
   bnb_optimizer: False  # use bnb 8bit AdamW optimizer or not
 
