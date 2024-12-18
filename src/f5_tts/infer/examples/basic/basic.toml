@@ -1,11 +1,15 @@
 # F5-TTS | E2-TTS
 model = "F5-TTS"
-ref_audio = "infer/examples/basic/basic_ref_en.wav"
+ref_audio = "/store/store4/data/LJSpeech-1.1/wavs/LJ022-0023.wav"
 # If an empty "", transcribes the reference audio automatically.
-ref_text = "Some call me nature, others call me mother nature."
-gen_text = "I don't really care what you call me. I've been a silent spectator, watching species evolve, empires rise and fall. But always remember, I am mighty and enduring."
+ref_text = "The overwhelming majority of people in this country know how to sift the wheat from the chaff in what they hear and what they read."
+gen_text = "the Secret Service believed that it was very doubtful that any President would ride regularly in a vehicle with a fixed top, even though transparent."
 # File with text to generate. Ignores the text above.
 gen_file = ""
 remove_silence = false
 output_dir = "tests"
 output_file = "infer_cli_basic.wav"
+
+ckpt_file = "ckpts/F5TTS_Small_beta_vocos_char_LJSpeech_train/model_last.pt"
+model_cfg = "ckpts/F5TTS_Small_beta_vocos_char_LJSpeech_train/config.yaml"
+vocab_file = "data/LJSpeech_train_char/vocab.txt"

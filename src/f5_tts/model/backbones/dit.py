@@ -147,6 +147,7 @@ class DiT(nn.Module):
         drop_audio_cond,  # cfg for cond audio
         drop_text,  # cfg for text
         mask: bool["b n"] | None = None,  # noqa: F722
+        return_attn: bool = False,
     ):
         batch, seq_len = x.shape[0], x.shape[1]
         if time.ndim == 0:
